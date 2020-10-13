@@ -1,0 +1,15 @@
+{
+  "name": "maia-slack",
+  "version": "1.0.0",
+  "description": "AI calendar assistant Slackbot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ."
+  },
+  "author": "KPal",
+  "license": "Proprietary",
+  "dependencies": {
+    "slackbots": "^1.2.0"
+  },
+  "devDependencies": {}
+}
