@@ -21,6 +21,14 @@ module.exports = function(bot) {
             action: function(msg, match) {
                 bot.postMessage(msg.channel, match[1]);
             }
+        },
+        login: {
+            private: true,
+            desc: `${this.prefix} login <email>`,
+            regex: new RegExp(`${this.prefix} login (.+)`, 'g'),
+            action: function(msg, match) {
+                bot.postMessage(msg.channel, `> *Follow the link to sign in*\nhttps://calendar.google.com/calendar/embed?src=${match[1]}@gmail.com`);
+            }
         }
     };
 

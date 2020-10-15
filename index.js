@@ -33,10 +33,18 @@ const msgEventCallback = {
 
             // Perform relevant action
             if (cmd.admin) {
+                // Admin only
                 if (CONSTS.admins.includes(msg.user)) {
                     cmd.action(msg, match);
                 } else {
                     bot.postMessage(msg.channel, "> *You do not have permission to execute this command. Please contact your administrator to request access.*");
+                }
+            } else if (cmd.private) {
+                // DMs only
+                if (msg.channel[0] === "D") {
+                    cmd.action(msg, match);
+                } else {
+                    bot.postMessage(msg.channel, "> *This command can only be performed in direct messages*");
                 }
             } else {
                 cmd.action(msg, match);
