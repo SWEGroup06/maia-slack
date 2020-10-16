@@ -9,6 +9,7 @@
   "author": "KPal",
   "license": "Proprietary",
   "dependencies": {
+    "node-fetch": "^2.6.1",
     "slackbots": "^1.2.0"
   },
   "devDependencies": {}

@@ -53,7 +53,6 @@ const msgEventCallback = {
             // Only match one commmand
             break;
         }
-        
     }
 }
 
