@@ -9,7 +9,7 @@ module.exports = function(bot) {
         "U01CEG3V7B7", //KPal
     ];
 
-    this.url = 'http://localhost:5000'; //Add remote address for heroku
+    this.url = 'https://maia-server.herokuapp.com/'; //Add remote address for heroku
     this.conn = new Connection(this.url);
 
     this.commands = {
