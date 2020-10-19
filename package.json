@@ -9,8 +9,9 @@
   "author": "KPal",
   "license": "Proprietary",
   "dependencies": {
-    "node-fetch": "^2.6.1",
-    "slackbots": "^1.2.0"
+    "@slack/client": "^5.0.2",
+    "googleapis": "^61.0.0",
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {}
 }
