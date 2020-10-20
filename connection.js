@@ -15,6 +15,10 @@ class Connection {
     getFreeSlots() {
         return this._request('api/free-slots');
     }
+
+    userLogin(user, tokens) {
+        return this._request(`login?user=${encodeURIComponent(JSON.stringify(user))}&tokens=${encodeURIComponent(JSON.stringify(tokens))}`);
+    }
 }
 
 module.exports = Connection;
