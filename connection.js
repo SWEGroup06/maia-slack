@@ -13,7 +13,7 @@ class Connection {
     }
 
     login(userId) {
-        return this._request(`api/login?userId=${encodeURIComponent(JSON.stringify(userId))}`);
+        return this._request(`login?userId=${encodeURIComponent(JSON.stringify(userId))}`);
     }
 }
 
