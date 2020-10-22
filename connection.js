@@ -12,12 +12,8 @@ class Connection {
         });
     }
 
-    getFreeSlots() {
-        return this._request('api/free-slots');
-    }
-
-    userLogin(user, tokens) {
-        return this._request(`login?user=${encodeURIComponent(JSON.stringify(user))}&tokens=${encodeURIComponent(JSON.stringify(tokens))}`);
+    login(userId) {
+        return this._request(`/api/login?userId=${encodeURIComponent(JSON.stringify(userId))}`);
     }
 }
 

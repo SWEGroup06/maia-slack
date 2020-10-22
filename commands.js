@@ -1,16 +1,10 @@
 const Connection = require('./connection.js');
 
-const AUTH = require('./auth.js');
-
-
 module.exports = function(CONFIG, web) {
     let context = this;
 
     // Connection Interface
     this.conn = new Connection(CONFIG.serverURL);
-
-    // Login Map
-    this.login = {};
 
     this.commands = {
         help: {
@@ -23,77 +17,29 @@ module.exports = function(CONFIG, web) {
                 });
             }
         },
-        say: {
-            admin: true,
-            desc: `${CONFIG.prefix} say <message>`,
-            regex: new RegExp(`${CONFIG.prefix} say (.+)`, 'g'),
-            action: function(msg, match) {
-                web.chat.postMessage({
-                    channel: msg.channel,
-                    text: match[1]
-                });
-            }
-        },
         login: {
             private: true,
             desc: `${CONFIG.prefix} login`,
             regex: new RegExp(`${CONFIG.prefix} login`, 'g'),
-            action: function(msg, match) {
-                if (!context.login[msg.user]) context.login[msg.user] = true;
-                web.chat.postMessage({
-                    channel: msg.channel,
-                    text: `> *Click <${AUTH.generateAuthUrl()}|here> to sign in*\n> *Verify with provided token by entering* \`maia verify <YOUR_TOKEN>\``
-                });
-            }
-        },
-        verify: {
-            private: true,
-            desc: `${CONFIG.prefix} verify <token>`,
-            regex: new RegExp(`${CONFIG.prefix} verify (.+)`, 'g'),
-            action: function(msg, match) {
-                if (context.login[msg.user]) {
-                    AUTH.getTokens(match[1]).then(function(tokens) {
-                        context.conn.userLogin(msg.user, tokens).then(function() {
-                            delete context.login[msg.user];
-                            web.chat.postMessage({
-                                channel: msg.channel,
-                                text: `> *Verification Successful \`${JSON.stringify(tokens)}\`*`
-                            });
-                        }).catch(function(err) {
-                            web.chat.postMessage({
-                                channel: msg.channel,
-                                text: `> *Verification Error: \`${err}\`*`
-                            });
-                        })
-                    }).catch(function(err) {
+            action: function(msg) {
+                context.conn.login(msg.user).then(function(res) {
+                    if (res && res.url) {
                         web.chat.postMessage({
                             channel: msg.channel,
-                            text: `> *Verification Error: \`${err}\`*`
+                            text: `> *Click <${res.url}|here> to login with Google*`
                         });
-                    });
-                } else {
-                    web.chat.postMessage({
-                        channel: msg.channel,
-                        text: `> *You have not started to sign in in. Type \`maia login\` to begin*`
-                    });
-                }
-            }
-        },
-        freeSlots: {
-            desc: `${CONFIG.prefix} free slots`,
-            regex: new RegExp(`${CONFIG.prefix} free slots`, 'g'),
-            action: function(msg) {
-                context.conn.getFreeSlots().then(function(slots) {
-                    web.chat.postMessage({
-                        channel: msg.channel, 
-                        text: `> *Free Slots*\n> \`\`\`${slots.map(period => `${new Date(period.start).toGMTString()} - ${new Date(period.end).toGMTString()}`).join("\n")}\`\`\``
-                    });
+                    } else {
+                        web.chat.postMessage({
+                            channel: msg.channel,
+                            text: `> *LOGIN ERROR: Invalid Object Response*`
+                        });
+                    }
                 }).catch(function(err) {
                     web.chat.postMessage({
-                        channel: msg.channel, 
-                        text: `> *Error*\n> \`\`\`${err}\`\`\``
+                        channel: msg.channel,
+                        text: `> *LOGIN ERROR: ${err}*`
                     });
-                })
+                });
             }
         }
     };
