@@ -1,5 +1,12 @@
-# Node
-/node_modules
+# Environments
+.env
 
-# Environment
-.env.json
+# VSCode
+.vscode
+
+# PyCharm
+.idea
+
+# Node
+node_modules
+.DS_Store
