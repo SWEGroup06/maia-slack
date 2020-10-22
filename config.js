@@ -11,5 +11,5 @@ module.exports = {
 
     BOT_TOKEN: ENV.BOT_TOKEN,
 
-    serverURL: 'https://maia-server.herokuapp.com/',
+    serverURL: 'https://maia-server.herokuapp.com',
 }
