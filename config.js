@@ -1,6 +1,5 @@
 
-const fs = require('fs');
-const ENV = fs.existsSync('./.env.json') ? require('./.env.json') : process.env;
+const DEBUG = process.argv.includes('--dev') || false;
 
 module.exports = {
     prefix: 'maia',
@@ -9,7 +8,8 @@ module.exports = {
         'U01CEG3V7B7', // KPal
     ],
 
-    BOT_TOKEN: ENV.BOT_TOKEN,
+    DEBUG,
+    BOT_TOKEN: DEBUG ? process.env.MAIA_BETA_BOT_TOKEN : process.env.MAIA_BOT_TOKEN,
 
     serverURL: 'https://maia-server.herokuapp.com',
 };

@@ -4,18 +4,19 @@ const { RTMClient, WebClient } = SlackClient;
 // Load environment variables
 require('dotenv').config();
 
-// Slack Interfaces
-const rtm = new RTMClient(process.env.MAIA_BOT_TOKEN);
-const web = new WebClient(process.env.MAIA_BOT_TOKEN);
-
 const CONFIG = require('./config.js');
+
+// Slack Interfaces
+const rtm = new RTMClient(CONFIG.BOT_TOKEN);
+const web = new WebClient(CONFIG.BOT_TOKEN);
+
 const COMMANDS = require('./lib/commands.js')(CONFIG, web);
 
 
 // Start callback
 rtm.on('ready', function () {
   console.log('============================');
-  console.log(`Maia is ONLINE`);
+  console.log(`Maia ${CONFIG.DEBUG ? "(BETA)" : ""} is ONLINE`);
   console.log('============================');
 });
 
