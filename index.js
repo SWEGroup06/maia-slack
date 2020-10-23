@@ -37,18 +37,7 @@ const msgEventCallback = {
       if (!match) continue;
 
       // Perform relevant action
-      if (cmd.admin) {
-        // Admin only
-        if (CONFIG.admins.includes(msg.user)) {
-          cmd.action(msg, match);
-        } else {
-          web.chat.postMessage({
-            channel: msg.channel,
-            text: `> *You do not have permission to execute this command. 
-                Please contact your administrator to request access.*`,
-          });
-        }
-      } else if (cmd.private) {
+      if (cmd.private) {
         // DMs only
         if (msg.channel[0] === 'D') {
           cmd.action(msg, match);
