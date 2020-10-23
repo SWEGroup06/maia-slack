@@ -29,11 +29,13 @@ const msgEventCallback = {
     // Discard if no message content or messages without prefix
     if (!content || !content.startsWith(CONFIG.prefix)) return;
 
+
     for (const key in COMMANDS) {
       const cmd = COMMANDS[key];
 
       // Check if command regex matches
-      const match = cmd.regex.exec(content);
+      const match = cmd.regex ? cmd.regex.exec(content) : cmd.search(content);
+      // console.log(content, cmd.regex, match);
       if (!match) continue;
 
       // Perform relevant action
