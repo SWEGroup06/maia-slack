@@ -4,18 +4,19 @@ const { RTMClient, WebClient } = SlackClient;
 // Load environment variables
 require('dotenv').config();
 
-// Slack Interfaces
-const rtm = new RTMClient(process.env.MAIA_BOT_TOKEN);
-const web = new WebClient(process.env.MAIA_BOT_TOKEN);
-
 const CONFIG = require('./config.js');
+
+// Slack Interfaces
+const rtm = new RTMClient(CONFIG.BOT_TOKEN);
+const web = new WebClient(CONFIG.BOT_TOKEN);
+
 const COMMANDS = require('./lib/commands.js')(CONFIG, web);
 
 
 // Start callback
 rtm.on('ready', function () {
   console.log('============================');
-  console.log(`Maia is ONLINE`);
+  console.log(`Maia ${CONFIG.DEBUG ? "(BETA)" : ""} is ONLINE`);
   console.log('============================');
 });
 
@@ -28,26 +29,17 @@ const msgEventCallback = {
     // Discard if no message content or messages without prefix
     if (!content || !content.startsWith(CONFIG.prefix)) return;
 
+
     for (const key in COMMANDS) {
       const cmd = COMMANDS[key];
 
       // Check if command regex matches
-      const match = cmd.regex.exec(content);
+      const match = cmd.regex ? cmd.regex.exec(content) : cmd.search(content);
+      // console.log(content, cmd.regex, match);
       if (!match) continue;
 
       // Perform relevant action
-      if (cmd.admin) {
-        // Admin only
-        if (CONFIG.admins.includes(msg.user)) {
-          cmd.action(msg, match);
-        } else {
-          web.chat.postMessage({
-            channel: msg.channel,
-            text: `> *You do not have permission to execute this command. 
-                Please contact your administrator to request access.*`,
-          });
-        }
-      } else if (cmd.private) {
+      if (cmd.private) {
         // DMs only
         if (msg.channel[0] === 'D') {
           cmd.action(msg, match);
