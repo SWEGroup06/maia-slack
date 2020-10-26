@@ -17,7 +17,14 @@ const COMMANDS = require('./lib/commands.js')(CONFIG, web);
 rtm.on('ready', function () {
   console.log('============================');
   console.log(`Maia ${CONFIG.DEBUG ? "(BETA)" : ""} is ONLINE`);
+  console.log(`Server URL: ${CONFIG.serverURL}`);
   console.log('============================');
+
+  //TODO: Change id to use email instead of compound key
+  // web.users.info({
+  //   token: CONFIG.BOT_TOKEN, 
+  //   user: "U01CEG3V7B7"
+  // }).then(console.log);
 });
 
 
@@ -28,10 +35,11 @@ const msgEventCallback = {
 
     // Discard if no message content or messages without prefix
     if (!content || !content.startsWith(CONFIG.prefix)) return;
-
+  
 
     for (const key in COMMANDS) {
       const cmd = COMMANDS[key];
+
 
       // Check if command regex matches
       const match = cmd.regex ? cmd.regex.exec(content) : cmd.search(content);
