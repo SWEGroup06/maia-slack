@@ -12,19 +12,12 @@ const web = new WebClient(CONFIG.BOT_TOKEN);
 
 const COMMANDS = require('./lib/commands.js')(CONFIG, web);
 
-
 // Start callback
 rtm.on('ready', function () {
   console.log('============================');
   console.log(`Maia ${CONFIG.DEBUG ? "(BETA)" : ""} is ONLINE`);
   console.log(`Server URL: ${CONFIG.serverURL}`);
   console.log('============================');
-
-  //TODO: Change id to use email instead of compound key
-  // web.users.info({
-  //   token: CONFIG.BOT_TOKEN, 
-  //   user: "U01CEG3V7B7"
-  // }).then(console.log);
 });
 
 
