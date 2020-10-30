@@ -5,6 +5,7 @@ const { RTMClient, WebClient } = SlackClient;
 require('dotenv').config();
 
 const CONFIG = require('./config.js');
+const UTILS = require('./lib/utils.js');
 
 // Slack Interfaces
 const rtm = new RTMClient(CONFIG.BOT_TOKEN);
@@ -55,7 +56,18 @@ const msgEventCallback = {
       }
 
       // Only match one commmand
-      break;
+      return;
+    }
+
+    if (content.toLowerCase().startsWith("maia")) {
+      web.chat.postMessage({
+        channel: msg.channel,
+        text: `> *${[
+          'Sorry I didnt quite catch that. Could you repeat that again?',
+          'Please try again.',
+          'Sorry I didnt understand your command. Refer to the help menu (\`maia help\`) and try again',
+        ][UTILS.random(3)]}*`
+      })
     }
   },
 };
