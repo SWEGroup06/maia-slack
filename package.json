@@ -19,6 +19,7 @@
     "@slack/client": "^5.0.2",
     "dotenv": "^8.2.0",
     "googleapis": "^61.0.0",
+    "luxon": "^1.25.0",
     "node-fetch": "^2.6.1"
   }
 }
