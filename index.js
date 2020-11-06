@@ -11,7 +11,10 @@ const UTILS = require('./lib/utils.js');
 const rtm = new RTMClient(CONFIG.BOT_TOKEN);
 const web = new WebClient(CONFIG.BOT_TOKEN);
 
-const COMMANDS = require('./lib/commands.js')(CONFIG, web);
+const Connection = require('./connection.js');
+const conn = new Connection(CONFIG.serverURL);
+
+const COMMANDS = require('./lib/commands.js')(CONFIG, web, conn);
 
 // Start callback
 rtm.on('ready', function () {
@@ -23,7 +26,7 @@ rtm.on('ready', function () {
 
 
 // Message Event callback
-const msgEventCallback = {
+const msgEventHandlers = {
   message: function (msg) {
     const content = msg.text;
 
@@ -33,7 +36,6 @@ const msgEventCallback = {
 
     for (const key in COMMANDS) {
       const cmd = COMMANDS[key];
-
 
       // Check if command regex matches
       const match = cmd.regex ? cmd.regex.exec(content) : cmd.search(content);
@@ -73,8 +75,8 @@ const msgEventCallback = {
 };
 
 rtm.on('message', function (data) {
-  const cb = msgEventCallback[data.type];
-  if (cb) cb(data);
+  const handler = msgEventHandlers[data.type];
+  if (handler) handler(data);
 });
 
 rtm.start();
