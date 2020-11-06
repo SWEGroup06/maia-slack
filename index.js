@@ -11,7 +11,7 @@ const UTILS = require('./lib/utils.js');
 const rtm = new RTMClient(CONFIG.BOT_TOKEN);
 const web = new WebClient(CONFIG.BOT_TOKEN);
 
-const Connection = require('./connection.js');
+const Connection = require('./lib/connection.js');
 const conn = new Connection(CONFIG.serverURL);
 
 const COMMANDS = require('./lib/commands.js')(CONFIG, web, conn);
