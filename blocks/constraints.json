@@ -3,7 +3,7 @@
     "type": "section",
     "text": {
       "type": "mrkdwn",
-      "text": "Hello :wave::skin-tone-3: \nWhat times are you definitely available for meetings? :spiral_calendar_pad:"
+      "text": "What times are you definitely available for meetings? :spiral_calendar_pad:"
     }
   },
   {
@@ -15,102 +15,93 @@
     "elements": [
       {
         "type": "static_select",
+        "action_id": "day",
         "placeholder": {
           "type": "plain_text",
           "text": "Select a day"
         },
-        "action_id": "day",
         "options": [
           {
             "text": {
               "type": "plain_text",
               "text": "Monday"
             },
-            "value": "Monday"
+            "value": "0"
           },
           {
             "text": {
               "type": "plain_text",
               "text": "Tuesday"
             },
-            "value": "Tuesday"
+            "value": "1"
           },
           {
             "text": {
               "type": "plain_text",
               "text": "Wednesday"
             },
-            "value": "Wednesday"
+            "value": "2"
           },
           {
             "text": {
               "type": "plain_text",
               "text": "Thursday"
             },
-            "value": "Thursday"
+            "value": "3"
           },
           {
             "text": {
               "type": "plain_text",
               "text": "Friday"
             },
-            "value": "Friday"
+            "value": "4"
           },
           {
             "text": {
               "type": "plain_text",
               "text": "Saturday"
             },
-            "value": "Saturday"
+            "value": "5"
           },
           {
             "text": {
               "type": "plain_text",
               "text": "Sunday"
             },
-            "value": "Sunday"
+            "value": "6"
           }
         ]
       },
       {
         "type": "timepicker",
+        "action_id": "start_time",
         "initial_time": "12:00",
         "placeholder": {
           "type": "plain_text",
           "text": "Select start time",
           "emoji": true
-        },
-        "action_id": "startTime"
+        }
       },
       {
         "type": "timepicker",
+        "action_id": "end_time",
         "initial_time": "13:00",
         "placeholder": {
           "type": "plain_text",
           "text": "Select end time",
           "emoji": true
-        },
-        "action_id": "endTime"
-      }
-    ]
-  },
-  {
-    "type": "actions",
-    "block_id": "constraints_submit",
-    "elements": [
+        }
+      },
       {
         "type": "button",
+        "action_id": "submit",
+        "style": "primary",
         "text": {
           "type": "plain_text",
           "text": "Submit",
           "emoji": true
-        },
-        "value": "click_me_123",
-        "action_id": "actionId-0"
+        }
       }
     ]
-  },
-  {
-    "type": "divider"
   }
 ]
