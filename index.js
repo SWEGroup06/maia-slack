@@ -35,6 +35,10 @@ const msgEventHandlers = {
 
     try {
       const res = await conn.nlp(content);
+      const cmd = COMMANDS[res.type];
+      if (cmd && cmd.action) {
+        await cmd.action(res, msg);
+      }
       console.log(res);
     } catch (error) {
       console.error(error);
@@ -81,9 +85,11 @@ const msgEventHandlers = {
   },
 };
 
-rtm.on('message', function (data) {
+rtm.on('message', async function (data) {
   const handler = msgEventHandlers[data.type];
-  if (handler) handler(data);
+  if (handler) {
+    await handler(data);
+  }
 });
 
 rtm.start();
