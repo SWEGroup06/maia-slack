@@ -32,13 +32,29 @@ const msgEventHandlers = {
     // Discard if no message content or messages without prefix
     if (!content || !content.startsWith(CONFIG.prefix)) return;
 
+    let loading = await web.chat.postMessage({
+      channel: msg.channel,
+      text: "Loading..."
+    });
     try {
       const res = await conn.nlp(content);
-      const cmd = COMMANDS[res.type];
-      if (cmd && cmd.action) await cmd.action(res, msg);
+      if (res.type != "unknown") {
+        const cmd = COMMANDS[res.type];
+        if (cmd && cmd.action) await cmd.action(res, msg);
+      } else {
+        web.chat.postMessage({
+          channel: msg.channel,
+          text: res.msg || "Invalid Command"
+        });
+      }
     } catch (error) {
       console.error(error);
-      return;
+    } finally {
+      web.chat.delete({
+        token: CONFIG.BOT_TOKEN,
+        channel: msg.channel,
+        ts: loading.message.ts
+      });
     }
   },
 };
