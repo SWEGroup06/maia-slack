@@ -6,19 +6,58 @@
     "type": "section",
     "text": {
       "type": "mrkdwn",
-      "text": "Hello! :ghost: Choose a meeting to reschedule!"
-    },
-    "block_id": "meeting_select",
-    "accessory": {
-      "type": "external_select",
-      "placeholder": {
-        "type": "plain_text",
+      "text": "Hello! :ghost: Choose a meeting to reschedule (optionally choose a specific time to reschedule to)!"
+    }
+  },
+  {
+      "type": "actions",
+      "block_id": "reschedule_options",
+      "elements": [
+          {
+              "type": "timepicker",
+              "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select time",
+                  "emoji": true
+              },
+              "action_id": "start_time"
+          },
+          {
+              "type": "timepicker",
+              "placeholder": {
+                  "type": "plain_text",
+                  "text": "Select time",
+                  "emoji": true
+              },
+              "action_id": "end_time"
+          },
+          {
+            "type": "external_select",
+            "placeholder": {
+            "type": "plain_text",
         "text": "Select an item",
         "emoji": true
       },
       "action_id": "meeting_select",
       "min_query_length": 0
-    }
+          }
+      ]
+  },
+  {
+    "type": "actions",
+    "block_id": "reschedule_button",
+    "elements": [
+      {
+        "type": "button",
+        "text": {
+          "type": "plain_text",
+          "text": "Reschedule",
+          "emoji": true
+        },
+        "value": "reschedule",
+        "action_id": "reschedule"
+      }
+    ]
   },
   {
     "type": "divider"
