@@ -27,56 +27,69 @@ rtm.on('ready', function () {
 
 // Message Event callback
 const msgEventHandlers = {
-  message: function (msg) {
+  message: async function (msg) {
     const content = msg.text;
 
     // Discard if no message content or messages without prefix
     if (!content || !content.startsWith(CONFIG.prefix)) return;
-  
 
-    for (const key in COMMANDS) {
-      const cmd = COMMANDS[key];
-
-      // Check if command regex matches
-      const match = cmd.regex ? cmd.regex.exec(content) : cmd.search(content);
-      // console.log(content, cmd.regex, match);
-      if (!match) continue;
-
-      // Perform relevant action
-      if (cmd.private) {
-        // DMs only
-        if (msg.channel[0] === 'D') {
-          cmd.action(msg, match);
-        } else {
-          web.chat.postMessage({
-            channel: msg.channel,
-            text: '> *This command can only be performed in direct messages*',
-          });
-        }
-      } else {
-        cmd.action(msg, match);
+    try {
+      const res = await conn.nlp(content);
+      const cmd = COMMANDS[res.type];
+      if (cmd && cmd.action) {
+        await cmd.action(res, msg);
       }
-
-      // Only match one commmand
+      console.log(res);
+    } catch (error) {
+      console.error(error);
       return;
     }
 
-    if (content.toLowerCase().startsWith("maia")) {
-      web.chat.postMessage({
-        channel: msg.channel,
-        text: `> *${[
-          'Sorry I didnt quite catch that. Could you repeat that again?',
-          'Please try again.',
-          'Sorry I didnt understand your command. Refer to the help menu (\`maia help\`) and try again',
-        ][UTILS.random(3)]}*`
-      })
-    }
+    // for (const key in COMMANDS) {
+    //   const cmd = COMMANDS[key];
+    //
+    //   // Check if command regex matches
+    //   const match = cmd.regex ? cmd.regex.exec(content) : cmd.search(content);
+    //   // console.log(content, cmd.regex, match);
+    //   if (!match) continue;
+    //
+    //   // Perform relevant action
+    //   if (cmd.private) {
+    //     // DMs only
+    //     if (msg.channel[0] === 'D') {
+    //       cmd.action(msg, match);
+    //     } else {
+    //       web.chat.postMessage({
+    //         channel: msg.channel,
+    //         text: '> *This command can only be performed in direct messages*',
+    //       });
+    //     }
+    //   } else {
+    //     cmd.action(msg, match);
+    //   }
+    //
+    //   // Only match one commmand
+    //   return;
+    // }
+    //
+    // if (content.toLowerCase().startsWith("maia")) {
+    //   web.chat.postMessage({
+    //     channel: msg.channel,
+    //     text: `> *${[
+    //       'Sorry I didnt quite catch that. Could you repeat that again?',
+    //       'Please try again.',
+    //       'Sorry I didnt understand your command. Refer to the help menu (\`maia help\`) and try again',
+    //     ][UTILS.random(3)]}*`
+    //   })
+    // }
   },
 };
 
-rtm.on('message', function (data) {
+rtm.on('message', async function (data) {
   const handler = msgEventHandlers[data.type];
-  if (handler) handler(data);
+  if (handler) {
+    await handler(data);
+  }
 });
 
 rtm.start();
