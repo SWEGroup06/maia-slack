@@ -27,10 +27,11 @@ rtm.on('ready', function () {
 // Message Event callback
 const msgEventHandlers = {
   message: async function (msg) {
-    const content = msg.text;
+    let content = msg.text;
 
     // Discard if no message content or messages without prefix
-    if (!content || !content.startsWith(CONFIG.prefix)) return;
+    if (!content || !content.toLowerCase().startsWith(CONFIG.prefix)) return;
+    content = content.toLowerCase().split("maia")[1].trim();
 
     let loading = await web.chat.postMessage({
       channel: msg.channel,
