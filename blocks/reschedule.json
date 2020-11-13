@@ -13,24 +13,26 @@
       "type": "actions",
       "block_id": "reschedule_options",
       "elements": [
-          {
-              "type": "timepicker",
+        {
+              "type": "datepicker",
+              "initial_date": "2020-11-01",
               "placeholder": {
-                  "type": "plain_text",
-                  "text": "Select time",
-                  "emoji": true
+                "type": "plain_text",
+                "text": "Select a date",
+                "emoji": true
               },
-              "action_id": "start_time"
-          },
-          {
-              "type": "timepicker",
+              "action_id": "startDate"
+            },
+            {
+              "type": "datepicker",
+              "initial_date": "2020-11-01",
               "placeholder": {
-                  "type": "plain_text",
-                  "text": "Select time",
-                  "emoji": true
+                "type": "plain_text",
+                "text": "Select a date",
+                "emoji": true
               },
-              "action_id": "end_time"
-          },
+              "action_id": "endDate"
+            },
           {
             "type": "external_select",
             "placeholder": {
