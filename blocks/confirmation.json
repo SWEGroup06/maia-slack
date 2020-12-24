@@ -1,0 +1,50 @@
+{
+	"blocks": [
+		{
+			"type": "section",
+			"fields": [
+				{
+					"type": "mrkdwn",
+					"text": "*Name:*\n eventName"
+				},
+				{
+					"type": "mrkdwn",
+					"text": "*Description:*\nLunch with @"
+				},
+				{
+					"type": "mrkdwn",
+					"text": "*StartTime:*\n31st December 2020 @ 12:00"
+				},
+				{
+					"type": "mrkdwn",
+					"text": "*endTime:*\n 31st December 2020 @ 13:00"
+				}
+			]
+		},
+		{
+			"type": "actions",
+			"elements": [
+				{
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"emoji": true,
+						"text": "Approve"
+					},
+					"style": "primary",
+					"value": "click_me_123"
+				},
+				{
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"emoji": true,
+						"text": "Deny"
+					},
+					"style": "danger",
+					"value": "click_me_123"
+				}
+			]
+		}
+	]
+}
