@@ -39,7 +39,7 @@ const msgEventHandlers = {
     });
     try {
       const res = await conn.nlp(content);
-      if (res.type != "unknown") {
+      if (res.type !== "unknown") {
         const cmd = COMMANDS[res.type];
         if (cmd && cmd.action) await cmd.action(res, msg);
       } else {
