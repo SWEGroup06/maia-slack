@@ -1,15 +1,15 @@
-{
-	"blocks": [
+[
 		{
 			"type": "section",
+			"block_id": "information",
 			"fields": [
 				{
 					"type": "mrkdwn",
-					"text": "*Name:*\n eventName"
+					"text": "*Name:*\nMeeting"
 				},
 				{
 					"type": "mrkdwn",
-					"text": "*Description:*\nLunch with @"
+					"text": " "
 				},
 				{
 					"type": "mrkdwn",
@@ -23,28 +23,30 @@
 		},
 		{
 			"type": "actions",
+			"block_id": "confirm",
 			"elements": [
 				{
+					"action_id": "edit",
 					"type": "button",
 					"text": {
 						"type": "plain_text",
 						"emoji": true,
-						"text": "Approve"
+						"text": "Edit"
 					},
 					"style": "primary",
-					"value": "click_me_123"
+					"value": "edit"
 				},
 				{
+					"action_id": "cancel",
 					"type": "button",
 					"text": {
 						"type": "plain_text",
 						"emoji": true,
-						"text": "Deny"
+						"text": "Cancel"
 					},
 					"style": "danger",
-					"value": "click_me_123"
+					"value": "cancel"
 				}
 			]
 		}
 	]
-}
