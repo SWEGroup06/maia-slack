@@ -1,0 +1,52 @@
+[
+		{
+			"type": "section",
+			"block_id": "information",
+			"fields": [
+				{
+					"type": "mrkdwn",
+					"text": "*Name:*\nMeeting"
+				},
+				{
+					"type": "mrkdwn",
+					"text": " "
+				},
+				{
+					"type": "mrkdwn",
+					"text": "*StartTime:*\n31st December 2020 @ 12:00"
+				},
+				{
+					"type": "mrkdwn",
+					"text": "*endTime:*\n 31st December 2020 @ 13:00"
+				}
+			]
+		},
+		{
+			"type": "actions",
+			"block_id": "confirm",
+			"elements": [
+				{
+					"action_id": "edit",
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"emoji": true,
+						"text": "Edit"
+					},
+					"style": "primary",
+					"value": "edit"
+				},
+				{
+					"action_id": "cancel",
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"emoji": true,
+						"text": "Cancel"
+					},
+					"style": "danger",
+					"value": "cancel"
+				}
+			]
+		}
+	]

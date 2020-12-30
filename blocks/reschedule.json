@@ -6,7 +6,7 @@
     "type": "section",
     "text": {
       "type": "mrkdwn",
-      "text": "Hello! :ghost: Choose a meeting to reschedule (optionally choose a specific time to reschedule to)!"
+      "text": "Hello! :ghost: Choose a meeting to reschedule (optionally choose a range of dates to reschedule to)!"
     }
   },
   {
