@@ -6,7 +6,7 @@ orbs:
   eslint: arrai/eslint@2.0.0
 
 jobs:
-  build-and-test:
+  build:
     executor:
       name: node/default
     steps:
@@ -22,7 +22,7 @@ jobs:
 workflows:
   main:
     jobs:
-      - build-and-test
+      - build
       - deploy:
           requires:
-            - build-and-test
+            - build
