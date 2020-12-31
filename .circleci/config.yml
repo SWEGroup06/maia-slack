@@ -1,0 +1,28 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@4.1.0
+  heroku: circleci/heroku@0.0.10
+  eslint: arrai/eslint@2.0.0
+
+jobs:
+  build:
+    executor:
+      name: node/default
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm run lint
+  deploy:
+    executor:
+      name: heroku/default
+    steps:
+      - checkout
+      - heroku/deploy-via-git
+workflows:
+  main:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build

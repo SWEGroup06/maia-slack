@@ -1,0 +1,27 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "plugins": [
+        "jsdoc"
+    ],
+    "extends": [
+        "google",
+        "plugin:jsdoc/recommended",
+        "prettier"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "rules": {
+    },
+    "settings": {
+        "jsdoc": {
+            "tagNamePreference": {
+                "returns": "return"
+            }
+        }
+    }
+}
