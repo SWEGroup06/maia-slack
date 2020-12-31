@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node . --dev",
     "prod": "node .",
-    "lint": "eslint .",
-    "lint-fix": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "prettier": "prettier --write \"**/*.js\""
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,9 @@
   },
   "devDependencies": {
     "eslint": "^7.16.0",
-    "eslint-config-google": "^0.14.0"
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-jsdoc": "^30.7.9",
+    "prettier": "^2.2.1"
   }
 }
