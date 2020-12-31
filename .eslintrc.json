@@ -16,5 +16,12 @@
         "sourceType": "module"
     },
     "rules": {
+    },
+    "settings": {
+        "jsdoc": {
+            "tagNamePreference": {
+                "returns": "return"
+            }
+        }
     }
 }
