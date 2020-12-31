@@ -1,5 +1,5 @@
 const SlackClient = require('@slack/client');
-const { RTMClient, WebClient } = SlackClient;
+const {RTMClient, WebClient} = SlackClient;
 
 // Load environment variables
 require('dotenv').config();
@@ -16,35 +16,35 @@ const conn = require('./lib/connection.js');
 const COMMANDS = require('./lib/commands.js')(CONFIG, web, conn);
 
 // Start callback
-rtm.on('ready', function () {
+rtm.on('ready', function() {
   console.log('============================');
-  console.log(`Maia ${CONFIG.DEBUG ? "(BETA)" : ""} is ONLINE`);
+  console.log(`Maia ${CONFIG.DEBUG ? '(BETA)' : ''} is ONLINE`);
   console.log(`Server URL: ${CONFIG.serverURL}`);
   console.log('============================');
 });
 
 // Message Event callback
 const msgEventHandlers = {
-  message: async function (msg) {
+  message: async function(msg) {
     let content = msg.text;
 
     // Discard if no message content or messages without prefix
     if (!content || !content.toLowerCase().startsWith(CONFIG.prefix)) return;
-    content = content.toLowerCase().split("maia")[1].trim();
+    content = content.toLowerCase().split('maia')[1].trim();
 
-    let loading = await web.chat.postMessage({
+    const loading = await web.chat.postMessage({
       channel: msg.channel,
-      text: "Loading..."
+      text: 'Loading...',
     });
     try {
       const res = await conn.nlp(content);
-      if (res.type !== "unknown") {
+      if (res.type !== 'unknown') {
         const cmd = COMMANDS[res.type];
         if (cmd && cmd.action) await cmd.action(res, msg);
       } else {
         web.chat.postMessage({
           channel: msg.channel,
-          text: res.msg || "Invalid Command"
+          text: res.msg || 'Invalid Command',
         });
       }
     } catch (error) {
@@ -53,13 +53,13 @@ const msgEventHandlers = {
       web.chat.delete({
         token: CONFIG.BOT_TOKEN,
         channel: msg.channel,
-        ts: loading.message.ts
+        ts: loading.message.ts,
       });
     }
   },
 };
 
-rtm.on('message', async function (data) {
+rtm.on('message', async function(data) {
   const handler = msgEventHandlers[data.type];
   if (handler) {
     await handler(data);
