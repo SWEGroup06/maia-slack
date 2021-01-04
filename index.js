@@ -10,9 +10,9 @@ const CONFIG = require("./config.js");
 const rtm = new RTMClient(CONFIG.BOT_TOKEN);
 const web = new WebClient(CONFIG.BOT_TOKEN);
 
-const conn = require("./lib/connection.js");
+const CONN = require("./lib/connection.js");
 
-const COMMANDS = require("./lib/commands.js")(CONFIG, web, conn);
+const COMMANDS = require("./lib/commands.js")(CONFIG, web, CONN);
 
 // Start callback
 rtm.on("ready", function () {
@@ -36,7 +36,7 @@ const msgEventHandlers = {
       text: "Loading...",
     });
     try {
-      const res = await conn.nlp(content);
+      const res = await CONN.nlp(content);
       if (res.type !== "unknown") {
         const cmd = COMMANDS[res.type];
         if (cmd && cmd.action) await cmd.action(res, msg);
