@@ -35,7 +35,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Built With
 
-* [Slack API](https://rometools.github.io/rome/)
+* [Slack API](https://api.slack.com/)
 
 ## Authors
 
