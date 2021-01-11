@@ -1,8 +1,8 @@
-# maia-slack
+# Maia Slack Bot
 
-Maia is a smart calendar application, powered by a state-of-the-art scheduling algorithm, combining Natural Language Processing and AI to provide an elegant solution for your scheduling needs.
+Maia is a smart calendar application, powered by an efficient scheduling algorithm, combining Natural Language Processing and Artificial Intelligence to provide an elegant solution for your scheduling needs.
 
-maia-slack is the respository containing the code for frontend of the Slack Application. 
+```maia-slack``` is the respository containing the code for frontend of the Slack Application. 
 
 ## Getting Started
 
